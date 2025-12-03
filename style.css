@@ -1,0 +1,441 @@
+:root {
+    --primary-bg-color: #0d1a26; /* Dark Blue-Black */
+    --text-color: #00ff00; /* Neon Green for terminal */
+    --accent-color: #ff00ff; /* Magenta for highlights/glitch */
+    --secondary-text: #00cc00; /* Slightly darker green */
+}
+
+body {
+    background-color: var(--primary-bg-color);
+    color: var(--text-color);
+    font-family: 'Roboto Mono', monospace; /* Monospace for terminal feel */
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+    min-height: 100vh;
+    overflow: hidden; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px; 
+    position: relative;
+}
+
+/* --- OVERLAYS FOR EFFECT --- */
+.static-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        transparent 0 1px,
+        rgba(0, 255, 0, 0.05) 1px 2px /* Subtle green scanline */
+    );
+    opacity: 0.1;
+    z-index: 100;
+    pointer-events: none;
+    animation: staticFlicker 1s infinite alternate;
+}
+
+@keyframes staticFlicker {
+    0% { opacity: 0.1; }
+    100% { opacity: 0.15; }
+}
+
+.terminal-glitch-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 101;
+    pointer-events: none;
+    animation: 
+        glitchEffect 6s infinite linear,
+        colorShift 3s infinite alternate; /* More subtle color shift */
+}
+
+@keyframes glitchEffect {
+    0% { clip: rect(20px, 9999px, 80px, 0); transform: skew(0.5deg); opacity: 0.1; }
+    2% { clip: rect(100px, 9999px, 150px, 0); transform: skew(-0.8deg); opacity: 0; }
+    4% { clip: rect(50px, 9999px, 120px, 0); transform: skew(0.3deg); opacity: 0.1; }
+    6% { clip: rect(180px, 9999px, 220px, 0); transform: skew(-1deg); opacity: 0; }
+    8% { clip: rect(250px, 9999px, 300px, 0); transform: skew(0.2deg); opacity: 0.1; }
+    10% { clip: rect(320px, 9999px, 370px, 0); transform: skew(-0.5deg); opacity: 0; }
+    100% { clip: rect(0, 9999px, 9999px, 0); transform: skew(0deg); opacity: 0; }
+}
+
+@keyframes colorShift {
+    0% { background: transparent; }
+    25% { background: rgba(255, 0, 255, 0.03); } /* Subtle magenta flash */
+    50% { background: transparent; }
+    75% { background: rgba(0, 255, 0, 0.03); } /* Subtle green flash */
+    100% { background: transparent; }
+}
+
+/* --- INVITATION CARD STYLING --- */
+.invitation-container {
+    max-width: 800px;
+    margin: 50px auto;
+    background: rgba(0, 0, 0, 0.8); /* Darker background */
+    padding: 30px 40px;
+    border-radius: 5px;
+    border: 1px solid var(--text-color); /* Green border */
+    box-shadow: 
+        0 0 20px var(--text-color), /* Green glow */
+        0 0 40px var(--accent-color); /* Magenta outer glow */
+    position: relative;
+    z-index: 10;
+    transform: rotateX(5deg) rotateY(-5deg); /* Slightly angled for a card feel */
+    transition: all 0.5s ease-in-out;
+}
+
+.invitation-container:hover {
+    transform: rotateX(0deg) rotateY(0deg) scale(1.02);
+    box-shadow: 
+        0 0 30px var(--text-color), 
+        0 0 60px var(--accent-color); 
+}
+
+.access-card-glow {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    background: radial-gradient(circle, var(--accent-color) 0%, transparent 40%);
+    opacity: 0;
+    z-index: -1;
+    animation: pulseGlow 4s infinite alternate;
+}
+
+@keyframes pulseGlow {
+    0% { opacity: 0; transform: scale(0.9); }
+    50% { opacity: 0.2; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.9); }
+}
+
+
+/* --- TYPOGRAPHY --- */
+.classification {
+    font-family: 'Press Start 2P', cursive; /* Retro pixel font */
+    color: var(--accent-color);
+    font-size: 0.9em;
+    margin-bottom: 15px;
+    text-shadow: 0 0 5px var(--accent-color);
+}
+
+.mission-title {
+    font-family: 'Press Start 2P', cursive;
+    color: var(--text-color);
+    font-size: 2.8em;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px var(--text-color);
+    margin-top: 0;
+    margin-bottom: 5px;
+    animation: textFlicker 1.5s infinite alternate;
+}
+
+@keyframes textFlicker {
+    0% { opacity: 1; text-shadow: 0 0 10px var(--text-color); }
+    50% { opacity: 0.8; text-shadow: none; }
+    100% { opacity: 1; text-shadow: 0 0 12px var(--text-color), 0 0 5px white; }
+}
+
+.mission-tagline {
+    font-size: 1.1em;
+    color: var(--secondary-text);
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: var(--accent-color);
+    font-size: 1.6em;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    text-shadow: 0 0 8px var(--accent-color);
+}
+
+.mission-details p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #c0c0c0; /* Lighter grey for readability */
+    margin-bottom: 10px;
+}
+
+.datetime-code {
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: 1.2em;
+    text-shadow: 0 0 5px var(--text-color);
+}
+
+.riddle {
+    font-style: italic;
+    color: var(--accent-color);
+    margin-top: 20px;
+}
+
+.location-hint {
+    font-size: 0.9em;
+    color: var(--secondary-text);
+}
+
+.footer-msg {
+    font-size: 0.8em;
+    color: var(--accent-color);
+    margin-top: 40px;
+    animation: textFlicker 3s infinite alternate;
+}
+
+/* --- REVEAL EFFECT FOR SECTIONS --- */
+.reveal-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* --- CHRISTMAS TREE (Mission-style) --- */
+.christmas-tree {
+    position: relative;
+    width: 150px;
+    height: 200px;
+    margin: 30px auto 0;
+    filter: drop-shadow(0 5px 10px var(--text-color)); /* Green glow around tree */
+    transform: rotateX(10deg); /* Tilt the tree slightly */
+}
+
+/* Tree Layers - Use darker, subtle greens */
+.layer {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 75px solid transparent;
+    border-right: 75px solid transparent;
+    left: 0;
+}
+
+.layer-1 { top: 0; border-bottom: 60px solid #004d40; } /* Dark forest green */
+.layer-2 { top: 45px; border-bottom: 80px solid #00695c; }
+.layer-3 { top: 105px; border-bottom: 100px solid #00796b; }
+
+.trunk {
+    position: absolute;
+    bottom: 0;
+    left: 50px;
+    width: 50px;
+    height: 30px;
+    background-color: #3e2723; /* Dark brown */
+}
+
+.star {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3.5em;
+    color: var(--accent-color); /* Magenta star */
+    text-shadow: 0 0 15px var(--accent-color), 0 0 5px white;
+    animation: starPulse 2s infinite alternate;
+}
+
+@keyframes starPulse {
+    0% { transform: translateX(-50%) scale(1); opacity: 1; }
+    100% { transform: translateX(-50%) scale(1.1); opacity: 0.8; }
+}
+
+/* --- LIGHTS STYLING (Data nodes) --- */
+.light {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    box-shadow: 0 0 4px currentColor, 0 0 8px currentColor, 0 0 12px currentColor;
+    animation: dataPulse 1s infinite alternate; 
+}
+
+@keyframes dataPulse {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0.3; transform: scale(0.7); }
+}
+
+/* --- SNOW/DATA STREAM EFFECT --- */
+.snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5; /* Below the main invitation */
+}
+
+.snowflake {
+    position: absolute;
+    background: rgba(0, 255, 0, 0.7); /* Green 'data' flakes */
+    border-radius: 50%;
+    box-shadow: 0 0 5px var(--text-color);
+}
+
+@keyframes fall {
+    0% { transform: translateY(-10vh) translateX(0) scale(1); opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { transform: translateY(100vh) translateX(var(--x-end)) scale(var(--s-end)); opacity: 0; }
+}
+
+
+/* --- NEW STYLES FOR SLIDE INTERFACE --- */
+
+.mission-slide {
+    min-height: 400px; /* Ensure a consistent card size */
+    padding: 10px 0;
+    opacity: 1; /* Starts visible, JS handles the hiding */
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transform: translateX(0);
+    position: relative;
+}
+
+.mission-slide.hidden {
+    display: none;
+    opacity: 0;
+    transform: translateX(20px);
+    /* Note: We use display: none; for the hidden state to fully remove it from layout */
+}
+
+/* Hide the tree initially, it only shows on Slide 1 */
+.mission-tree:not(.initial-tree-view) {
+    display: none;
+}
+
+.navigation-controls {
+    margin-top: 30px;
+}
+
+.nav-button {
+    background: transparent;
+    color: var(--text-color);
+    border: 1px solid var(--text-color);
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-family: 'Press Start 2P', cursive;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+    text-shadow: 0 0 5px var(--text-color);
+}
+
+.nav-button:hover {
+    background: rgba(0, 255, 0, 0.1);
+    box-shadow: 0 0 10px var(--text-color), 0 0 15px var(--accent-color);
+}
+
+.nav-button.hidden {
+    visibility: hidden; /* Use visibility instead of display:none to keep layout */
+}
+
+.fancy-separator {
+    animation: textFlicker 2s infinite alternate; /* Keep the flicker effect */
+}
+
+.token-reveal {
+    font-size: 1.8em !important;
+    text-shadow: 0 0 15px var(--text-color);
+}
+
+/* --- BASE STYLING (Keep previous map styles like body, invitation-container, etc.) --- */
+
+/* Initially hide the main invitation card */
+.hidden-on-load {
+    display: none;
+}
+
+/* --- AUTHORIZATION SCREEN STYLING --- */
+.auth-screen {
+    max-width: 500px;
+    background: var(--parchment-light);
+    border: 3px solid var(--ink-accent);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    z-index: 15;
+    text-align: center;
+    transform: rotateZ(2deg);
+}
+
+.auth-title {
+    font-family: 'IM Fell DW Pica', serif;
+    font-size: 2.5em;
+    color: var(--ink-accent);
+    text-decoration: underline;
+}
+
+.auth-instruction {
+    font-family: 'Cedarville Cursive', cursive;
+    font-size: 1.4em;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+#auth-code {
+    font-family: 'IM Fell DW Pica', serif;
+    font-size: 2em;
+    width: 150px;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid var(--text-color);
+    background: #fff8e1; /* Off-white for input */
+    color: var(--text-color);
+}
+
+.auth-error {
+    color: var(--ink-accent);
+    font-weight: bold;
+    margin-top: 15px;
+    animation: simpleFlicker 1s infinite alternate;
+}
+
+/* --- ADD THIS TO THE VERY END OF YOUR style.css FILE --- */
+@media (max-width: 600px) {
+    
+    /* Shrink padding and margins on small screens */
+    .invitation-container {
+        padding: 40px 20px;
+        margin: 20px auto;
+        transform: rotateZ(0deg) rotateX(0deg) !important; /* Remove slight 3D angle on mobile */
+    }
+
+    /* Reduce font size for readability on small screens */
+    .map-title {
+        font-size: 2.5em; 
+    }
+    
+    .map-handwriting {
+        font-size: 1.2em;
+    }
+
+    /* Adjust the Authorization screen for better fit */
+    .auth-screen {
+        padding: 30px;
+        transform: rotateZ(0deg) !important; 
+    }
+    
+    /* Make buttons slightly larger/easier to press */
+    .nav-button {
+        padding: 12px 25px;
+    }
+
+    /* Remove the dust/candle effect on smaller devices to save processing power */
+    .dust-overlay, .candle-glow-overlay {
+        display: none;
+    }
+}

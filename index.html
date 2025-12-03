@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Secret Scroll Invitation: Operation Turkey Slayer</title>
+    
+    <link href="https:fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1&family=Cedarville+Cursive&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="candle-glow-overlay"></div>
+    <div class="dust-overlay"></div>
+    
+    <div class="auth-screen">
+        <h1 class="auth-title">AUTHORIZATION REQUIRED</h1>
+        <p class="auth-instruction">To access the scroll, key in the last 4 digits of the Agent's designated phone number.</p>
+        
+        <input type="number" id="auth-code" maxlength="4" placeholder="••••" />
+        <button id="auth-button" class="nav-button map-button">UNLOCK SCROLL</button>
+        
+        <p id="auth-message" class="auth-error"></p>
+    </div>
+
+    <div class="invitation-container hidden-on-load"> 
+        <div class="map-edge-texture"></div>
+        
+        <div class="mission-slide" data-slide="1">
+            <header>
+                <p class="classification map-script">Hark! A Secret Scroll Found!</p>
+                <h1 class="mission-title map-title">Stuff the Turkey (and Us)</h1>
+                <p class="mission-tagline">Seek Ye The Secret Feast. Proceed with Utmost Caution.</p>
+            </header>
+            <div class="fancy-separator map-ink">... Unroll The Map ...</div>
+            
+            <div class="christmas-tree mission-tree initial-tree-view">
+                <div class="star map-star">★</div>
+                <div class="layer layer-1"></div>
+                <div class="layer layer-2"></div>
+                <div class="layer layer-3"></div>
+                <div class="trunk"></div>
+            </div>
+        </div>
+
+        <div class="mission-slide hidden" data-slide="2">
+            <h2> The Gathering Point </h2>
+            <p>Thou art chosen to participate in this year's covert Turkey Slaying Feast, scheduled for:</p>
+            <p class="datetime-code map-handwriting">DATE: Friday, the 12th Day of December, 2025</p>
+            <p class="datetime-code map-handwriting">TIME: 7:00 PM</p>
+            <br>
+            <p>TO IDENTIFY YOUR BUDDIES, EXCHANGE THE SECRET CODE:</p>
+            <p class="datetime-code token-reveal map-handwriting">Stuff the Turkey (and Us)</p>
+            <div class="wax-seal">📜</div>
+        </div>
+
+        <div class="mission-slide hidden" data-slide="3">
+            <h2> Pirate's Code </h2>
+            <p>Rule 1: Speak not of Operation Turkey Slayer within the great ship's hold (the office). He who leaks the secret shall walk the plank.</p>
+            <p>Rule 2: This is a DRINK & FEAST session. Prepare thy weapons and stomachs for plunder.</p>
+            <br>
+            <h2> Location Coordinates </h2>
+            <p>The X marks the spot in Telok Ayer. We have anchored here before.</p>
+            <p class="riddle map-ink">The Maiden's name, solitary and sought, where treasure is served and battles are fought.</p>
+            <p class="location-hint">[HINT: '048775']</p>
+        </div>
+
+        <div class="mission-slide hidden" data-slide="4">
+            <h2> Attire Protocol </h2>
+            <p>Dress as freely as the sea breeze allows. For true adventurers, don thy colors of the Great Winter Festival:</p>
+            <p class="datetime-code map-handwriting">Suggested Colors: Green of the Forest, Red of the Berry, or White of the Snow</p>
+            <p>Ye may wear the ship's flag or even disguise yerself as a mighty Fir Tree!</p>
+            <br>
+            <p class="footer-msg map-script">Go forth, slay the turkey, and may yer journey be merry! - Captain X</p>
+        </div>
+
+
+        <div class="navigation-controls">
+            <button id="prev-button" class="nav-button map-button hidden">⟵ BACK</button>
+            <button id="next-button" class="nav-button map-button">NEXT ⟶</button>
+        </div>
+        
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
